@@ -1,1 +1,1 @@
-3-paths
+3-path
