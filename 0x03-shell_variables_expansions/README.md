@@ -1,1 +1,1 @@
-11-binary_to_deciml
+11-binary_to_decimal
