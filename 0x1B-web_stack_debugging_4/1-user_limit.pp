@@ -1,4 +1,4 @@
-# fix limit file at hbton user.
+# fix limitt file at hbton user.
 
 exec { 'fix_limit_hbton_user':
   command => 'sed -i "/holberton hard/s/5/10000/" /etc/security/limits.conf',
