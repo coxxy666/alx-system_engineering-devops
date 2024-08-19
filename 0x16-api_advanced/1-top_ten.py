@@ -1,33 +1,23 @@
 #!/usr/bin/python3
-
 """
-prints the titles of the first 10 hot posts listed for a given subreddit
+Queries the Reddit API and prints the titles of the first 10 hot posts listed
+for a given subreddit.
 """
-
-from requests import get
+import requests
 
 
 def top_ten(subreddit):
     """
-    function that queries the Reddit API and prints the titles of the first
-    10 hot posts listed for a given subreddit
+    Queries the Reddit API and prints the titles of the first 10 hot posts
+    listed for a given subreddit.
     """
-
-    if subreddit is None or not isinstance(subreddit, str):
-        print("None")
-
-    user_agent = {'User-agent': 'Google Chrome Version 81.0.4044.129'}
-    params = {'limit': 10}
-    url = 'https://www.reddit.com/r/{}/hot/.json'.format(subreddit)
-
-    response = get(url, headers=user_agent, params=params)
-    results = response.json()
-
+    url = 'https://www.reddit.com/r/{}/hot.json?show="all"&limit=10'.format(
+        subreddit)
+    headers = {'User-Agent': 'Python/1.0(Holberton School 0x16)'}
+    response = requests.get(url, headers=headers)
     try:
-        my_data = results.get('data').get('children')
-
-        for i in my_data:
-            print(i.get('data').get('title'))
-
-    except Exception:
+        top_ten = response.json()['data']['children']
+        for post in top_ten:
+            print(post['data']['title'])
+    except KeyError:
         print("None")
